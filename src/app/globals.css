@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f2f0e9;
   --foreground: #171717;
 }
 
@@ -12,15 +12,85 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
-body {
+/* body {
   background: var(--background);
   color: var(--foreground);
+  color: #5c00006e;
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+/*Layout of whole page */
+body {
+  background: var(--background);
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns:
+    [full-start]minmax(1rem, 1fr)
+    [content-start]
+    minmax(0, 600px)
+    [center]
+    minmax(0, 600px)
+    [content-end]
+    minmax(1rem, 1fr) [full-end];
+}
+
+header,
+footer,
+.full-bleed,
+main {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: full-start / full-end;
+
+  > * {
+    grid-column: content-start / content-end;
+  }
+}
+
+main > .full-bleed {
+  grid-column: full-start / full-end;
+}
+
+footer > .footer-content {
+  grid-column: content-start / content-end;
+}
+
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #601728;
+  content: "";
+  transition: width 250ms ease;
+}
+
+.hover-underline:hover::after,
+.hover-underline:focus-visible::after {
+  width: 100%;
+}
+
+.hover-underline-footer::after {
+  background-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-underline::after {
+    transition: none;
+  }
 }
