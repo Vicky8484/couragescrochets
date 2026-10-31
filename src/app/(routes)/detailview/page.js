@@ -1,11 +1,3 @@
 export default function DetailView() {
-  return (
-    <>
-      <Hero />
-      <ProductList />
-      <KundeAnmeldelser />
-      <SenesteVideoer />
-      <OmMig />
-    </>
-  );
+  return <div>Hello gurl</div>;
 }
